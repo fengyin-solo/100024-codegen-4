@@ -11,7 +11,10 @@
     <main class="app-main">
       <header class="app-head">
         <span class="head-desc">面向剧本分场、选角档期、拍摄通告、场地器材、后期特效与杀青结算的一体化剧组管理后台。</span>
-        <span class="head-user">当前值班：{{ store.operator }} · {{ store.shiftLabel }}</span>
+        <span class="head-user">
+          当前值班：{{ store.operator }}<template v-if="store.operatorProfile"> ·
+            {{ store.operatorProfile.岗位职务 }}（{{ store.operatorProfile.角色 }}）</template> · {{ store.shiftLabel }}
+        </span>
       </header>
       <RouterView />
     </main>

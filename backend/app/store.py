@@ -4,9 +4,13 @@
 """
 from __future__ import annotations
 
+import threading
 from typing import Any
 
 from app.seed import SEED_ROWS
+
+# 台账只追加、不改动，不属于业务台账模块，概览卡片里不统计它
+LEDGER_MODULE = "crew_ledger"
 
 
 class Store:
@@ -14,9 +18,12 @@ class Store:
         self._tables: dict[str, list[dict[str, Any]]] = {
             name: [dict(row) for row in rows] for name, rows in SEED_ROWS.items()
         }
+        # 进场、离场、请假的状态流转必须串行办理，避免多人同时离场产生重复记录
+        self.crew_lock = threading.RLock()
+        self._tables.setdefault(LEDGER_MODULE, [])
 
     def module_names(self) -> list[str]:
-        return sorted(self._tables)
+        return sorted(name for name in self._tables if name != LEDGER_MODULE)
 
     def rows(self, module: str) -> list[dict[str, Any]]:
         return self._tables.setdefault(module, [])
