@@ -5,6 +5,7 @@ const Script = () => import('@/views/script/index.vue')
 const Scene = () => import('@/views/scene/index.vue')
 const Casting = () => import('@/views/casting/index.vue')
 const Crew = () => import('@/views/crew/index.vue')
+const CrewLedger = () => import('@/views/crew-ledger/index.vue')
 const Notice = () => import('@/views/notice/index.vue')
 const Location = () => import('@/views/location/index.vue')
 const Prop = () => import('@/views/prop/index.vue')
@@ -30,6 +31,7 @@ const router = createRouter({
     { path: '/scene', name: 'scene', component: Scene },
     { path: '/casting', name: 'casting', component: Casting },
     { path: '/crew', name: 'crew', component: Crew },
+    { path: '/crew-ledger', name: 'crew-ledger', component: CrewLedger },
     { path: '/notice', name: 'notice', component: Notice },
     { path: '/location', name: 'location', component: Location },
     { path: '/prop', name: 'prop', component: Prop },
